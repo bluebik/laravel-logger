@@ -1,0 +1,23 @@
+{
+    "name": "bluebik/logger",
+    "description": "Log seperate folder by level build on monolog/monolog",
+    "require": {
+        "monolog/monolog": "^1.23.0"
+	},
+	"autoload": {
+		"psr-4": {
+			"Bluebik\\Logger\\": "src/"
+		}
+	},
+	"extra": {
+		"laravel": {
+			"providers": [
+				"Bluebik\\Logger\\LoggerServiceProvider"
+			],
+			"aliases": {
+                "Logger": "Bluebik\\Logger\\LoggerFacade"
+            }
+		}
+	},
+    "license": "MIT"
+}
