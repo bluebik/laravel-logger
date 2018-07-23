@@ -4,7 +4,7 @@ namespace Bluebik\Logger;
 
 use Monolog\Formatter\LineFormatter;
 use Monolog\Handler\StreamHandler;
-use Request;
+use Illuminate\Support\Facades\Request;
 
 /**
  * Class LoggerFactory
