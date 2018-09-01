@@ -22,6 +22,44 @@ class Logger extends \Monolog\Logger
 
         $message = "$action $message";
 
+        $context = $this->hiddenContext($context);
+
+        if ($debug) {
+            $this->debug($message, $context);
+        } else {
+            $this->info($message, $context);
+        }
+
+    }
+
+    public function error($message, array $context = array())
+    {
+        $context = $this->hiddenContext($context);
+        return parent::error("{$this->requestId} $message", $context);
+    }
+
+    public function info($message, array $context = array())
+    {
+        $context = $this->hiddenContext($context);
+        return parent::info("{$this->requestId} $message", $context);
+    }
+
+    public function debug($message, array $context = array())
+    {
+        $context = $this->hiddenContext($context);
+        return parent::debug("{$this->requestId} $message", $context);
+    }
+
+    /**
+     * @param mixed $requestId
+     */
+    public function setRequestId($requestId)
+    {
+        $this->requestId = $requestId;
+    }
+
+    private function hiddenContext(array $context = array())
+    {
         $hiddenFields = config('logger.hidden_fields');
         foreach ($context as $key => $values) {
             if (is_array($values)) {
@@ -37,35 +75,6 @@ class Logger extends \Monolog\Logger
             }
         }
 
-        if ($debug) {
-            $this->debug($message, $context);
-        } else {
-            $this->info($message, $context);
-        }
-
+        return $context;
     }
-
-    public function error($message, array $context = array())
-    {
-        return parent::error("{$this->requestId} $message", $context);
-    }
-
-    public function info($message, array $context = array())
-    {
-        return parent::info("{$this->requestId} $message", $context);
-    }
-
-    public function debug($message, array $context = array())
-    {
-        return parent::debug("{$this->requestId} $message", $context);
-    }
-
-    /**
-     * @param mixed $requestId
-     */
-    public function setRequestId($requestId)
-    {
-        $this->requestId = $requestId;
-    }
-
 }
