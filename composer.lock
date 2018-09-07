@@ -1,23 +1,23 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "6ef26762fe49f5a67e2d7a93dbf816c3",
+    "content-hash": "953e01823c994ddc936eb6c83bc1c9ac",
     "packages": [
         {
             "name": "monolog/monolog",
-            "version": "1.23.0",
+            "version": "dev-fix-concurrent-mkdir",
             "source": {
                 "type": "git",
-                "url": "https://github.com/Seldaek/monolog.git",
-                "reference": "fd8c787753b3a2ad11bc60c063cff1358a32a3b4"
+                "url": "https://github.com/bluebik/monolog.git",
+                "reference": "d8dae03a6853c6765461da967fb91ebb2996ec88"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Seldaek/monolog/zipball/fd8c787753b3a2ad11bc60c063cff1358a32a3b4",
-                "reference": "fd8c787753b3a2ad11bc60c063cff1358a32a3b4",
+                "url": "https://api.github.com/repos/bluebik/monolog/zipball/d8dae03a6853c6765461da967fb91ebb2996ec88",
+                "reference": "d8dae03a6853c6765461da967fb91ebb2996ec88",
                 "shasum": ""
             },
             "require": {
@@ -64,7 +64,17 @@
                     "Monolog\\": "src/Monolog"
                 }
             },
-            "notification-url": "https://packagist.org/downloads/",
+            "autoload-dev": {
+                "psr-4": {
+                    "Monolog\\": "tests/Monolog"
+                }
+            },
+            "scripts": {
+                "test": [
+                    "parallel-lint . --exclude vendor",
+                    "phpunit"
+                ]
+            },
             "license": [
                 "MIT"
             ],
@@ -82,7 +92,10 @@
                 "logging",
                 "psr-3"
             ],
-            "time": "2017-06-19T01:22:40+00:00"
+            "support": {
+                "source": "https://github.com/bluebik/monolog/tree/fix-concurrent-mkdir"
+            },
+            "time": "2018-09-07T04:12:54+00:00"
         },
         {
             "name": "psr/log",
@@ -135,7 +148,9 @@
     "packages-dev": [],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "monolog/monolog": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": [],
