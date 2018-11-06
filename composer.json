@@ -2,7 +2,7 @@
     "name": "bluebik/logger",
     "description": "Log seperate folder by level build on monolog/monolog",
     "require": {
-        "monolog/monolog": "dev-fix-concurrent-mkdir"
+        
 	},
 	"autoload": {
 		"psr-4": {
@@ -10,10 +10,7 @@
 		}
 	},
 	"repositories": [
-		{
-			"type": "vcs",
-			"url": "https://github.com/bluebik/monolog.git"
-		}
+		
 	],
 	"extra": {
 		"laravel": {
