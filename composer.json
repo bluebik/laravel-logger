@@ -1,8 +1,9 @@
 {
-    "name": "bluebik/logger",
-    "description": "Log seperate folder by level build on monolog/monolog",
-    "require": {
-        "monolog/monolog": "dev-fix-concurrent-mkdir"
+	"name": "bluebik/logger",
+	"description": "Log seperate folder by level build on monolog/monolog",
+	"require": {
+		"monolog/monolog": "dev-fix-concurrent-mkdir",
+		"graylog2/gelf-php": "~1.5"
 	},
 	"autoload": {
 		"psr-4": {
@@ -21,9 +22,9 @@
 				"Bluebik\\Logger\\LoggerServiceProvider"
 			],
 			"aliases": {
-                "Logger": "Bluebik\\Logger\\LoggerFacade"
-            }
+				"Logger": "Bluebik\\Logger\\LoggerFacade"
+			}
 		}
 	},
-    "license": "MIT"
+	"license": "MIT"
 }
