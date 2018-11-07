@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Request;
 use Monolog\Handler\GelfHandler;
 use Gelf\Publisher;
 use Gelf\Transport\UdpTransport;
+use Gelf\Transport\TcpTransport;
 
 /**
  * Class LoggerFactory
@@ -17,7 +18,6 @@ use Gelf\Transport\UdpTransport;
  */
 class LoggerFactory
 {
-
     /**
      * @param $name
      *
@@ -25,13 +25,15 @@ class LoggerFactory
      */
     public static function create($name)
     {
+        $logstashConfig = config('logger.logstash');
+
         $logger = new Logger($name);
 
         $streamHandler = self::streamHandler($name);
         $logger->pushHandler($streamHandler);
 
-        if(config('logger.logstash.enabled')){
-            $gelfHandler = self::logStashHandler();
+        if($logstashConfig['enabled'] && !in_array($name, $logstashConfig['exclude_names'])){
+            $gelfHandler = self::logStashHandler($logstashConfig);
             $logger->pushHandler($gelfHandler);
         }
 
@@ -65,10 +67,16 @@ class LoggerFactory
      *
      * @return \Monolog\Handler\GelfHandler;
      */
-    public static function logStashHandler()
+    public static function logStashHandler($logstashConfig)
     {
-        $logstashConfig = config('logger.logstash');
-        $gelfHandler = new GelfHandler(new Publisher(new UdpTransport($logstashConfig['host'], $logstashConfig['port'])));
+        if($logstashConfig['protocol'] == 'UDP'){
+            $transport = new UdpTransport($logstashConfig['host'], $logstashConfig['port']);
+        }
+        else{
+            $transport = new TcpTransport($logstashConfig['host'], $logstashConfig['port']);
+        }
+
+        $gelfHandler = new GelfHandler(new Publisher($transport));
         $gelfHandler->setFormatter(new GelfMessageFormatter($logstashConfig['system_name']));
         return $gelfHandler;
     }
