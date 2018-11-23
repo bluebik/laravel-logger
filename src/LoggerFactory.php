@@ -40,11 +40,6 @@ class LoggerFactory
         $requestId = Request::header('x-request-id');
         $logger->setRequestId($requestId);
 
-        $logger->pushProcessor(function($record) use ($requestId){
-            $record['extra']['request_id'] = $requestId;
-            return $record;
-        });
-
         return $logger;
     }
 
