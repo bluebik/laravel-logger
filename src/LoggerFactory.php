@@ -25,13 +25,17 @@ class LoggerFactory
      */
     public static function create($name)
     {
-        $logstashConfig = config('logger.logstash');
+
 
         $logger = new Logger($name);
 
-        $streamHandler = self::streamHandler($name);
-        $logger->pushHandler($streamHandler);
+        $localLogConfig = config('logger.local_log');
+        if($localLogConfig['enabled'] && !in_array($name, $localLogConfig['exclude_names'])) {
+            $streamHandler = self::streamHandler($name);
+            $logger->pushHandler($streamHandler);
+        }
 
+        $logstashConfig = config('logger.logstash');
         if($logstashConfig['enabled'] && !in_array($name, $logstashConfig['exclude_names'])){
             $gelfHandler = self::logStashHandler($logstashConfig);
             $logger->pushHandler($gelfHandler);

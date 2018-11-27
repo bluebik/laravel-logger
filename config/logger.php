@@ -1,6 +1,10 @@
 <?php
 
 return [
+    'local_log' => [
+        'enabled' => env('LOCAL_LOG_ENABLED', false),
+        'exclude_names' => explode(',', env('LOCAL_LOG_EXCLUDE_NAMES', '')),
+    ],
     'logstash' => [
         'enabled' => env('LOGSTASH_ENABLED', false),
         'system_name' => env('LOGSTASH_SYSTEM_NAME'),
