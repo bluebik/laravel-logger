@@ -25,8 +25,6 @@ class LoggerFactory
      */
     public static function create($name)
     {
-
-
         $logger = new Logger($name);
 
         $localLogConfig = config('logger.local_log');
