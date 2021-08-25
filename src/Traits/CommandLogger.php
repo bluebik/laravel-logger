@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Traits;
+namespace Bluebik\Logger\Traits;
 
 use Bluebik\Logger\LoggerFactory;
 use Illuminate\Support\Str;
