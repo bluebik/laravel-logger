@@ -32,22 +32,22 @@ class Logger extends \Monolog\Logger
 
     }
 
-    public function error($message, array $context = array())
+    public function error($message, array $context = array()): void
     {
         $context = $this->hiddenContext($context);
-        return parent::error("{$this->requestId} $message", $context);
+        parent::error("{$this->requestId} $message", $context);
     }
 
-    public function info($message, array $context = array())
+    public function info($message, array $context = array()): void
     {
         $context = $this->hiddenContext($context);
-        return parent::info("{$this->requestId} $message", $context);
+        parent::info("{$this->requestId} $message", $context);
     }
 
-    public function debug($message, array $context = array())
+    public function debug($message, array $context = array()): void
     {
         $context = $this->hiddenContext($context);
-        return parent::debug("{$this->requestId} $message", $context);
+        parent::debug("{$this->requestId} $message", $context);
     }
 
     /**
