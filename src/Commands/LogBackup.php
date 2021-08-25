@@ -96,7 +96,7 @@ class LogBackup extends Command
     public function archiveLog($logDir)
     {
         $backupCmd = "cd $this->logPath && tar -zcvf $this->backupPath/{$this->backupFileName($logDir)} $logDir";
-        $this->comment("ดำเนินการบีบอัดไฟล์ ... " . $backupCmd);
+        $this->comment("archiving file ... " . $backupCmd);
         exec($backupCmd);
     }
 
@@ -106,7 +106,7 @@ class LogBackup extends Command
     public function removeOldLog($logDir)
     {
         $removeCmd = "rm -rf $this->logPath/$logDir";
-        $this->comment("ดำเนินการลบไฟล์ ... " . $removeCmd);
+        $this->comment("removing file ... " . $removeCmd);
         exec($removeCmd);
     }
 
